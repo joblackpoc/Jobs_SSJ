@@ -5,3 +5,4 @@
 4. พัฒนาระบบรายงานปรุงเอง (web application, rdc_report, bireport)
 5. พัฒนาโปรแกรมที่เกี่ยวข้องงานสาธารณสุข( Jupyter Notebook, http://61.19.80.156/payslip)
 6. ข้อมูล Data_exchange ในฐานข้อมูล HDC
+7. งานอื่นที่ได้รับมอบหมาย
