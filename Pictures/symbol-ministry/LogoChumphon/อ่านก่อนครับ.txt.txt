@@ -1,0 +1,2 @@
+Color CMYK
+= C90,M30,Y95,K30
