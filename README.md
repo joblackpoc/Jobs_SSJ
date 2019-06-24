@@ -7,7 +7,7 @@
 6. ข้อมูล Data_exchange ในฐานข้อมูล HDC
 7. งานอื่นที่ได้รับมอบหมาย
 
-To Rollback Version
+# To Rollback Version
 8. git reflog 
 9. git reset --hard HEAD@{ตัวเลขเวอร์ชั่น}
 
