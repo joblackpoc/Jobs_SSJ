@@ -10,4 +10,3 @@
 # To Rollback Version
 8. git reflog 
 9. git reset --hard HEAD@{ตัวเลขเวอร์ชั่น}
-
