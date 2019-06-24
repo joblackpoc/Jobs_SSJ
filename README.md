@@ -6,10 +6,8 @@
 5. พัฒนาโปรแกรมที่เกี่ยวข้องงานสาธารณสุข( Jupyter Notebook, http://61.19.80.156/payslip)
 6. ข้อมูล Data_exchange ในฐานข้อมูล HDC
 7. งานอื่นที่ได้รับมอบหมาย
-<<<<<<< HEAD
+
 To Rollback Version
 8. git reflog 
 9. git reset --hard HEAD@{ตัวเลขเวอร์ชั่น}
-=======
-8. ทดสอบการ pull
->>>>>>> e04e7a62c8fecd09031eace824437d2aaef48928
+
