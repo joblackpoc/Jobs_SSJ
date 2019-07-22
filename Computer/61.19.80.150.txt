@@ -1,2 +1,0 @@
-Vmware Vsphere Client
-61.19.80.150
