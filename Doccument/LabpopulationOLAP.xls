@@ -1,0 +1,119 @@
+<html xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns="http://www.w3.org/TR/REC-html40">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta>
+      <meta name="ProgId content=Excel.Sheet"></meta><style>
+            table
+            {mso-displayed-decimal-separator:"\.";
+            mso-displayed-thousand-separator:"\,";}
+
+            @page
+                    {margin:1.0in .75in 1.0in .75in;
+                    mso-header-margin:.5in;
+                    mso-footer-margin:.5in;}
+            tr
+                    {mso-height-source:auto;}
+            col
+                    {mso-width-source:auto;}
+            br
+                    {mso-data-placement:same-cell;}
+            .basestyle
+                    {mso-number-format:General;
+                    text-align:general;
+                    vertical-align:bottom;
+                    white-space:nowrap;
+                    mso-rotate:0;
+                    mso-background-source:auto;
+                    mso-pattern:auto;
+                    color:windowtext;
+                    font-size:10.0pt;
+                    font-weight:400;
+                    font-style:normal;
+                    text-decoration:none;
+                    font-family:Arial;
+                    mso-generic-font-family:auto;
+                    mso-font-charset:0;
+                    border:none;
+                    mso-protection:locked visible;
+                    mso-style-name:Normal;
+                    mso-style-id:0;}
+
+              .col-heading
+                    {mso-style-parent:basestyle;
+                    font-weight:700;
+                    font-family:"Arial Unicode MS";
+                    mso-generic-font-family:auto;
+                    mso-font-charset:0;
+                    text-align:left;
+                    vertical-align:middle;
+                    border:.5pt solid black;
+                    mso-pattern:auto none;}
+
+              .row-heading
+                    {mso-style-parent:basestyle;
+                    font-weight:700;
+                    font-family:"Arial Unicode MS";
+                    mso-generic-font-family:auto;
+                    mso-font-charset:0;
+                    text-align:left;
+                    vertical-align:top;
+                    border-top:.5pt solid black;
+                    border-right:.5pt solid black;
+                    border-bottom:none;
+                    border-left:.5pt solid black;
+                    mso-pattern:auto none;}
+
+              .dataitem
+                    {mso-style-parent:basestyle;
+                    font-family:"Arial Unicode MS";
+                    mso-generic-font-family:auto;
+                    mso-font-charset:0;
+                    
+                    
+                    text-align:right;
+                    vertical-align:top;
+                    border:.5pt solid black;
+                    background:white;
+                    mso-pattern:auto none;}
+            </style></head>
+   <body>
+      <p><img height="300" width="1100" src="http://192.168.56.101:8080/pentaho/GetChart?filename=jfreechart-3207950693554971822.png"></img></p>
+      <table border="1">
+         <tr>
+            <th text-align="left" vertical-align="top" nowrap="nowrap" bgcolor="#FFFFFF" colspan="4" rowspan="1">&nbsp;</th>
+            <th class="col-heading" text-align="left" vertical-align="top" nowrap="nowrap" colspan="1" rowspan="1" bgcolor="#F0F0F0">Measures</th>
+         </tr>
+         <tr>
+            <th class="col-heading" text-align="left" vertical-align="top" nowrap="nowrap" colspan="1" rowspan="1" bgcolor="#C0C0C0">&#3614;&#3639;&#3657;&#3609;&#3607;&#3637;&#3656;</th>
+            <th class="col-heading" text-align="left" vertical-align="top" nowrap="nowrap" colspan="1" rowspan="1" bgcolor="#C0C0C0">&#3626;&#3606;&#3634;&#3609;&#3610;&#3619;&#3636;&#3585;&#3634;&#3619;</th>
+            <th class="col-heading" text-align="left" vertical-align="top" nowrap="nowrap" colspan="1" rowspan="1" bgcolor="#C0C0C0">&#3648;&#3614;&#3624;</th>
+            <th class="col-heading" text-align="left" vertical-align="top" nowrap="nowrap" colspan="1" rowspan="1" bgcolor="#C0C0C0">&#3629;&#3634;&#3618;&#3640;</th>
+            <th class="col-heading" text-align="left" vertical-align="top" nowrap="nowrap" colspan="1" rowspan="1" bgcolor="#C0C0C0">&#3592;&#3635;&#3609;&#3623;&#3609;&#3611;&#3619;&#3632;&#3594;&#3634;&#3585;&#3619;(&#3588;&#3609;)</th>
+         </tr>
+         <tr>
+            <th class="row-heading" text-align="left" vertical-align="top" nowrap="nowrap" colspan="1" rowspan="1" bgcolor="#F0F0F0">&#3614;&#3639;&#3657;&#3609;&#3607;&#3637;&#3656;&#3607;&#3633;&#3657;&#3591;&#3627;&#3617;&#3604;</th>
+            <th class="row-heading" text-align="left" vertical-align="top" nowrap="nowrap" colspan="1" rowspan="1" bgcolor="#F0F0F0">&#3607;&#3633;&#3657;&#3591;&#3627;&#3617;&#3604;</th>
+            <th class="row-heading" text-align="left" vertical-align="top" nowrap="nowrap" colspan="1" rowspan="1" bgcolor="#F0F0F0">&#3607;&#3633;&#3657;&#3591;&#3627;&#3617;&#3604;</th>
+            <th class="row-heading" text-align="left" vertical-align="top" nowrap="nowrap" colspan="1" rowspan="1" bgcolor="#F0F0F0">&#3629;&#3634;&#3618;&#3640;&#3607;&#3633;&#3657;&#3591;&#3627;&#3617;&#3604;</th>
+            <td align="right" valign="top" nowrap="nowrap" bgcolor="#FFFFFF" class="dataitem" style="mso-number-format:\#\,\#\#0" x:num="7532.0">7,532</td>
+         </tr>
+         <tr>
+            <th class="row-heading" text-align="left" vertical-align="top" nowrap="nowrap" colspan="1" rowspan="1" bgcolor="#C0C0C0">&#3648;&#3586;&#3605; 05
+               <property xmlns="" label="$name" name="" value="&#3648;&#3586;&#3605; 05"></property>
+            </th>
+            <th class="row-heading" text-align="left" vertical-align="top" nowrap="nowrap" colspan="1" rowspan="1" bgcolor="#C0C0C0">&#3607;&#3633;&#3657;&#3591;&#3627;&#3617;&#3604;</th>
+            <th class="row-heading" text-align="left" vertical-align="top" nowrap="nowrap" colspan="1" rowspan="1" bgcolor="#C0C0C0">&#3607;&#3633;&#3657;&#3591;&#3627;&#3617;&#3604;</th>
+            <th class="row-heading" text-align="left" vertical-align="top" nowrap="nowrap" colspan="1" rowspan="1" bgcolor="#C0C0C0">&#3629;&#3634;&#3618;&#3640;&#3607;&#3633;&#3657;&#3591;&#3627;&#3617;&#3604;</th>
+            <td align="right" valign="top" nowrap="nowrap" bgcolor="#FFFFFF" class="dataitem" style="mso-number-format:\#\,\#\#0" x:num="6589.0">6,589</td>
+         </tr>
+         <tr>
+            <th class="row-heading" text-align="left" vertical-align="top" nowrap="nowrap" colspan="1" rowspan="1" bgcolor="#F0F0F0">&#3619;&#3634;&#3594;&#3610;&#3640;&#3619;&#3637;
+               <property xmlns="" label="$name" name="" value="&#3619;&#3634;&#3594;&#3610;&#3640;&#3619;&#3637;"></property>
+            </th>
+            <th class="row-heading" text-align="left" vertical-align="top" nowrap="nowrap" colspan="1" rowspan="1" bgcolor="#F0F0F0">&#3607;&#3633;&#3657;&#3591;&#3627;&#3617;&#3604;</th>
+            <th class="row-heading" text-align="left" vertical-align="top" nowrap="nowrap" colspan="1" rowspan="1" bgcolor="#F0F0F0">&#3607;&#3633;&#3657;&#3591;&#3627;&#3617;&#3604;</th>
+            <th class="row-heading" text-align="left" vertical-align="top" nowrap="nowrap" colspan="1" rowspan="1" bgcolor="#F0F0F0">&#3629;&#3634;&#3618;&#3640;&#3607;&#3633;&#3657;&#3591;&#3627;&#3617;&#3604;</th>
+            <td align="right" valign="top" nowrap="nowrap" bgcolor="#FFFFFF" class="dataitem" style="mso-number-format:\#\,\#\#0" x:num="6589.0">6,589</td>
+         </tr>
+      </table>
+   </body>
+</html>

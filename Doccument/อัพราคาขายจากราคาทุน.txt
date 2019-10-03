@@ -1,0 +1,51 @@
+﻿UPDATE
+ cdrug
+ inner JOIN
+ (SELECT # สุดท้ายเอาทศนิยมมาบวกกับราคาจำนวนเต็มตามราคาทุน
+tmp3.drugcode,
+ tmp3.drugname,
+ tmp3.cost,
+ tmp3.sell,
+ tmp3.drugcost,
+ case when tmp3.cost <10 then tmp3.sumcost+tmp3.point10
+ when tmp3.cost between 10.01 and 100 then tmp3.sumcost+tmp3.point100 else tmp3.sumcost+tmp3.point1000 end as resultsell
+ FROM
+ (SELECT #select ที่ 3 ให้เป้น tmp3 เพื่อจัดการกับทศนิยม
+tmp2.drugcode,
+ tmp2.drugname,
+ tmp2.cost,
+ tmp2.sell,
+ tmp2.drugcost,
+ tmp2.sumcost,
+ tmp2.pointcost,
+ case when tmp2.pointcost < 0.12 then 0
+ when tmp2.pointcost between 0.13 and 0.37 then 0.25
+ when tmp2.pointcost between 0.14 and 0.62 then 0.5
+ when tmp2.pointcost between 0.63 and 0.87 then 0.75 else 1 end as point10,
+ case when tmp2.pointcost < 0.25 then 0
+ when tmp2.pointcost between 0.26 and 0.75 then 0.5 else 1 end as point100,
+ case when tmp2.pointcost < 0.5 then 0 else 1 end as point1000
+ from
+ (SELECT #select ที่สอง เพื่อให้หาจุดทศนิยาไปคำนวน ให้เป็น tmp2
+ tmp.*,
+ floor(tmp.drugcost) as sumcost,
+ tmp.drugcost-floor(tmp.drugcost) as pointcost
+ from
+ (SELECT #Select ที่ 1 เพื่อให้เป็น tmp1
+ cdrug.drugcode,
+ cdrug.drugname,
+ cdrug.cost,
+ cdrug.sell,
+ CASE when cdrug.cost between 0 and 0.2 then 0.5
+ when cdrug.cost between 0.21 and 0.5 then 1.0
+ when cdrug.cost between 0.51 and 1.0 then 1.5
+ when cdrug.cost between 1.01 and 10.00 then 1.5+((cdrug.cost-1)*1.25)
+ when cdrug.cost between 10.01 and 100.00 then 13+((cdrug.cost-10)*1.2)
+ when cdrug.cost between 100.01 and 1000.00 then 126+((cdrug.cost-100)*1.15)
+ when cdrug.cost > 1000.00 then 1161+((cdrug.cost-1000)*1.1) else 0 end as drugcost
+ FROM
+ cdrug) as tmp
+ order by tmp.drugname) as tmp2) as tmp3) as drugsell
+ on cdrug.drugcode = drugsell.drugcode
+ set cdrug.sell = drugsell.resultsell
+ where cdrug.drugtype = '01';

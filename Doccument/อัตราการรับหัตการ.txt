@@ -1,0 +1,7 @@
+﻿select count(distinct visit.visitno) as visit ,count(cdrug.drugcode) as proced 
+ ,concat(round(((count(cdrug.drugcode) )/(COUNT(DISTINCT visit.visitno)))*100,2)," %") as 'อัตราหัตถการ' 
+from visit left join visitdrug on visit.pcucode = visitdrug.pcucode
+ and visit.visitno = visitdrug.visitno 
+ left JOIN cdrug on visitdrug.drugcode=cdrug.drugcode and length(trim(cdrug.drugcode)) = 7
+ and cdrug.drugtype='02'
+ WHERE visit.visitdate between '2012-10-01' and '2013-09-30';
