@@ -1,0 +1,399 @@
+======================
+ADDRESS
+======================
+SELECT p.pcucodeperson,
+p.pid,
+h.hid,
+p.hnomoi,
+h.road,
+v.villname,
+v.villno is null,
+v.villno,
+p.subdistcodemoi is null,
+p.subdistcodemoi,
+p.distcodemoi is null,
+p.distcodemoi,
+p.provcodemoi is null,
+p.provcodemoi,
+p.telephoneperson,
+p.dateupdate,
+h.villcode FROM person p 
+JOIN house h ON p.hcode=h.hcode AND p.pcucodeperson=h.pcucode 
+JOIN village v ON v.villcode=h.villcode AND h.pcucode=v.pcucode WHERE (1=1) 
+
+======================
+LABOR		  
+======================			  
+SELECT p.pcucodeperson,
+v.pid,
+v.visitno,
+v.datecheck,
+v.pregno,
+vp.lmp,
+v.ancres,
+v.hosservice,
+v.pcucodeperson,
+visit.username,
+v.dateupdate is null,
+v.dateupdate FROM visitanc v 
+JOIN visitancpregnancy vp ON v.pcucodeperson=vp.pcucodeperson AND v.pid=vp.pid AND v.pregno=vp.pregno 
+JOIN person p ON v.pid=p.pid 
+LEFT JOIN visit visit ON v.visitno=visit.visitno AND v.pcucode=visit.pcucode WHERE (1=1)  AND (v.datecheck != '')
+
+======================
+POSTNATAL
+======================		  
+SELECT v.pcucode is null,
+v.pcucode,
+p.pid,
+v.visitno,
+v.datecare,
+v.dateappointcare,
+vi.username,
+v.dateupdate FROM person p 
+JOIN visitancmothercare v ON v.pcucodeperson=p.pcucodeperson AND p.pid=v.pid 
+LEFT JOIN visit vi ON v.pcucode=vi.pcucode AND v.visitno=vi.visitno WHERE (1=1) AND (v.dateappointcare != '')
+
+======================
+APPOINTMENT
+======================
+SELECT vdappoint.pcucode,
+p.pid,vdappoint.visitno,
+vis.visitdate,
+vdappoint.appodate,
+vdappoint.appotype,
+cd.mapdisease,
+cd.diseasecode,
+vis.username,
+vis.dateupdate FROM visitdiag v 
+LEFT JOIN cdisease cd ON v.diagcode=cd.diseasecode 
+JOIN visitdiagappoint vdappoint ON v.pcucode=vdappoint.pcucode AND v.visitno=vdappoint.visitno AND v.diagcode=vdappoint.diagcode 
+JOIN visit vis ON vis.visitno=v.visitno AND v.pcucode=vis.pcucode 
+JOIN person p ON vis.pcucodeperson=p.pcucodeperson AND p.pid=vis.pid WHERE (1=1)  AND (v.appointdate != '')
+
+======================
+EPI
+======================
+SELECT ve.pcucode is null,
+ve.pcucode,
+p.pid,
+v.visitno,
+v.visitdate,
+ve.dateappoint,
+cd.files18epi,
+cdis.mapdisease,
+E.hosservice,
+v.username,
+v.dateupdate FROM visitepiappoint ve 
+LEFT JOIN visit v ON ve.pcucode=v.pcucode AND ve.visitno=v.visitno 
+JOIN person p ON ve.pcucodeperson=p.pcucodeperson AND ve.pid=p.pid 
+JOIN cdrug cd ON cd.drugcode=ve.vaccinecode 
+JOIN visitepi e ON ve.pid=e.pid AND ve.visitno=e.visitno
+JOIN cdisease cdis ON cdis.diseasecode=cd.files18epiappoint WHERE (1=1)  AND (ve.dateappoint != '')
+
+======================
+FP
+======================
+SELECT v.pcucode is null,
+v.pcucode,
+p.pid,
+v.visitno,
+v.datefp,
+v.datedue,
+CD.drugtypesub,
+vis.username,
+v.dateupdate FROM person p 
+JOIN visitfp v ON p.pcucodeperson=v.pcucodeperson AND v.pid=p.pid 
+LEFT JOIN visit vis ON v.pcucode=vis.pcucode AND v.visitno=vis.visitno 
+JOIN cdrug CD ON v.fpcode=CD.drugcode WHERE (1=1) AND (CD.drugtype = '04') AND (CD.drugtypesub != '0')  AND (CD.drugtypesub >= '1') AND (CD.drugtypesub <= '7') AND (vis.flagservice != '99')
+
+======================
+NUTRITION
+======================
+SELECT nutri.pcucode,
+p.pid,
+v.visitno,
+v.visitdate,
+nutri.dateappoint,
+v.username,
+nutri.dateupdate FROM visitnutrition nutri 
+JOIN visit v ON nutri.visitno=v.visitno AND nutri.pcucode=v.pcucode 
+JOIN person p ON p.pid=v.pid WHERE (1=1)  AND (nutri.dateappoint != '')
+
+======================
+CARD
+======================
+SELECT aliasperson.pcucodeperson,
+aliasperson.pid,
+alias.mapright,
+aliasperson.rightno,
+aliasperson.datestart,
+aliasperson.dateexpire,
+aliasperson.hosmain,
+aliasperson.hossub,
+aliasperson.dateupdate FROM cright alias 
+JOIN person aliasperson ON aliasperson.rightcode=alias.rightcode 
+LEFT JOIN coccupa co ON aliasperson.occupa=co.occupacode 
+
+======================
+CHRONIC
+======================
+SELECT pc.pcucodeperson,
+pc.pid,
+pc.datefirstdiag,
+pc.chroniccode,
+pc.cup,
+pc.datedischart,
+pc.typedischart,
+pc.dateupdate is null,
+pc.dateupdate FROM personchronic pc 
+WHERE (1=1) 
+
+======================
+CHRONICFU
+======================
+SELECT v.pcucode,
+v.pid,
+v.visitno,
+v.visitdate,
+v.weight,
+v.height,
+v.waist,
+v.pressure,
+ncd.examfoot,
+ncd.exameyel is null,
+ncd.exameyer is null,
+ncd.exameyel,
+ncd.exameyer,
+v.username,
+v.dateupdate FROM visit v 
+JOIN ncdservice ncd ON v.pcucode=ncd.pcucode AND v.visitno=ncd.seq WHERE (1=1) 
+
+======================
+COMMUNITY_SERVICE
+======================
+SELECT vhome.pcucode,
+v.pid,
+vhome.visitno,
+v.visitdate,
+chht.homehealthmap,
+v.username,
+v.dateupdate FROM visithomehealthindividual vhome 
+JOIN visit v ON vhome.pcucode=v.pcucode AND vhome.visitno=v.visitno 
+JOIN chomehealthtype chht ON vhome.homehealthtype=chht.homehealthcode WHERE (1=1) 
+
+======================
+DEATH
+======================
+SELECT p.pcucodeperson,
+p.pid,
+p.deaddate,
+p.cdeatha,
+p.cdeathb,
+p.cdeathc,
+p.cdeathd,
+p.odisease,
+p.deadcause,
+p.deadplace,
+p.dateupdate FROM persondeath p 
+JOIN person per ON per.pcucodeperson=p.pcucodeperson AND per.pid=p.pid WHERE (1=1) 
+
+======================
+ANC
+======================
+SELECT va.pcucode,
+va.pid,
+va.visitno,
+va.datecheck,
+va.dateappointcheck,
+va.caries,
+va.tartar,
+vs.username,
+va.dateupdate FROM visitanc va 
+LEFT JOIN visit vs ON va.visitno=vs.visitno AND va.pcucode=vs.pcucode WHERE (1=1) AND (va.toothcheck = '1') AND (va.dateappointcheck != '')
+
+SELECT vad.pcucodeperson,
+vad.pid,
+vad.pregno,
+vpreg.lmp,
+vpreg.edc,
+vad.datedeliver,
+vad.deliverend,
+vad.deliverplace,
+vad.hosservice,
+vad.delivertype,
+vad.operater,
+vad.dateupdate is null,
+vad.dateupdate FROM visitancdeliver vad 
+JOIN visitancpregnancy vpreg ON vad.pcucodeperson=vpreg.pcucodeperson AND vad.pid=vpreg.pid AND vad.pregno=vpreg.pregno WHERE (1=1) 
+
+======================
+DIAGNOSIS_OPD
+======================
+SELECT vd.pcucode,
+v.pid,
+vd.visitno,
+v.visitdate,
+vd.dxtype,
+vd.diagcode,
+u.username,
+vd.dateupdate FROM visitdiag vd 
+JOIN visit v ON vd.pcucode=v.pcucode AND vd.visitno=v.visitno 
+LEFT JOIN user u ON v.username=u.username WHERE (1=1) AND (v.flagservice != '99')
+
+======================
+DRUGALLERGY
+======================
+SELECT pa.pcucodeperson,
+pa.pid,
+cd.drugcode24,
+cd.drugname,
+pa.levelalergic,
+p.dateupdate FROM person p 
+JOIN personalergic pa ON p.pid=pa.pid 
+JOIN cdrug cd ON pa.drugcode=cd.drugcode WHERE (1=1) 
+
+======================
+DRUG_OPD
+======================
+SELECT vd.pcucode,
+v.pid,
+vd.visitno,
+v.visitdate,
+cd.drugcode24,
+cd.drugname,
+vd.unit,
+cd.unitsell,
+cd.pack,
+vd.realprice,
+vd.costprice,
+v.username,
+vd.dateupdate,
+cd.drugtype FROM visitdrug vd 
+JOIN visit v ON v.pcucode=vd.pcucode AND v.visitno=vd.visitno 
+JOIN cdrug cd ON cd.drugcode=vd.drugcode 
+JOIN person p ON p.pcucodeperson=v.pcucodeperson AND v.pid=p.pid WHERE (1=1) AND (v.flagservice != '99') AND (cd.drugcode24 != 'NULL') AND (cd.drugcode24 != '')
+
+======================
+HOME
+======================
+SELECT h.pcucode,
+h.hcode,
+h.hid,
+h.housechar,
+h.hno,
+h.road,
+vill.villname,
+h.villcode is null,
+h.villcode,
+p.telephoneperson,
+h.xgis,
+h.ygis,
+h.area,
+p.idcard,
+p2.idcard,
+h.toilet,
+h.waterdrinkeno,
+cwt.watergroup,
+h.garbageerase,
+h.housesanitation,
+h.houseendur,
+h.houseclean,
+h.houseairflow,
+h.houselight,
+h.waterassuage,
+h.controlinsetdisease,
+h.controlrat,
+h.dateupdate FROM house h 
+LEFT JOIN person p ON h.pcucode=p.pcucodeperson AND h.pidvola=p.pid 
+LEFT JOIN cwatertype cwt ON h.waterdrink=cwt.watertypecode 
+LEFT JOIN person p2 ON h.pid=p2.pid AND p2.pcucodeperson=h.pcucode 
+LEFT JOIN village vill ON h.pcucode=vill.pcucode AND h.villcode=vill.villcode WHERE (1=1) 
+
+======================
+
+======================
+SELECT sugar.pcucode,
+v.pid,
+sugar.visitno,
+v.visitdate,
+sugar.typetesting,
+sugar.foodsuspend,
+sugar.sugarnumdigit,
+sugar.dateupdate is null,
+v.dateupdate,
+sugar.dateupdate FROM visitlabsugarblood sugar 
+JOIN visit v ON sugar.pcucode=v.pcucode AND sugar.visitno=v.visitno 
+JOIN personchronic pc ON v.pcucodeperson=pc.pcucodeperson AND v.pid=pc.pid 
+WHERE (1=1)  AND pc.chroniccode in ('I10','I11','I12','I13','I14','I15','I16','E10','E11','E12','E13','E14','E15','N18')
+
+======================
+
+======================
+SELECT ncdperson.pcucode,ncdperson.pid,ncdperson.visitno,v.visitdate,v.incup,ncdperson.smoke,ncdperson.alcohol,ncdperson.screen_q1,ncdperson.htfamily,ncdperson.weight,ncdperson.height,ncdperson.waist,ncdperson.hbp_s1,ncdperson.hbp_d1,ncdperson.hbp_s2,ncdperson.hbp_d2,ncdperson.bsl,ncdperson.bstest,v.username,ncdperson.d_update FROM ncd_person_ncd_screen ncdperson JOIN visit v ON ncdperson.visitno=v.visitno AND ncdperson.pcucode=v.pcucodeperson WHERE (1=1) AND (v.visitdate >= '2012-09-01') AND (v.visitdate <= '2012-09-09')
+
+======================
+
+======================
+SELECT C.pcucodeperson,C.pidchild,C.pid,D.pregno,C.pregno,D.datedeliver,D.delivertime,D.deliverplace,D.hosservice,D.delivertype,D.operater,C.weight,C.asphyxia,C.vitamink,C.dateupdate FROM visitancdeliverchild C LEFT JOIN visitancdeliver D ON D.pcucodeperson=C.pcucodeperson AND D.pid=C.pid AND C.pregno=D.pregno LEFT JOIN person P ON D.pcucodeperson=P.pcucodeperson AND D.pid=P.pid WHERE (1=1) AND (D.datedeliver >= '2012-09-01') AND (D.datedeliver <= '2012-09-09')
+
+======================
+
+======================
+SELECT VBC.pcucode,VBC.pid,VBC.visitNo,D.datedeliver,VBC.datecare,VBC.babyhealth,vs.username,VBC.dateupdate FROM visitbabycare VBC JOIN person PChild ON PChild.pcucodeperson=VBC.pcucodeperson AND PChild.pid=VBC.pid LEFT JOIN visitancdeliverchild C ON C.pcucodechild=PChild.pcucodeperson AND C.pidchild=PChild.pid LEFT JOIN visitancdeliver D ON D.pcucodeperson=C.pcucodeperson AND D.pid=C.pid AND C.pregno=D.pregno LEFT JOIN person P ON D.pcucodeperson=P.pcucodeperson AND D.pid=P.pid LEFT JOIN visit vs ON VBC.pcucode=vs.pcucode AND VBC.visitNo=vs.visitno WHERE (1=1) AND (VBC.datecare >= '2012-09-01') AND (VBC.datecare <= '2012-09-09')
+
+======================
+
+======================
+SELECT a_visitnutrition.pcucode,a_person.pid,a_visit.visitno,a_visit.visitdate,a_visitnutrition.weight,a_visitnutrition.tall,a_visitnutrition.headcycle,a_visit.username,a_visitnutrition.dateupdate is null,a_visit.dateupdate,a_visitnutrition.dateupdate FROM visitnutrition a_visitnutrition JOIN visit a_visit ON a_visitnutrition.visitno=a_visit.visitno JOIN person a_person ON a_visit.pid=a_person.pid WHERE (1=1) AND (a_visit.visitdate >= '2012-09-01') AND (a_visit.visitdate <= '2012-09-09') AND (a_visit.flagservice != '99')
+
+======================
+
+======================
+SELECT p.pcucodeperson is null,p.pcucodeperson,p.idcard,p.pid,h.hcode,p.prename,p.fname,p.lname,p.sex,p.birth,p.marystatus,co.mapoccupa,p.origin,p.nation,p.religion,p.educate,p.familyposition,p.fatherid,p.motherid,p.mateid,p.datein,p.dischargetype,p.dischargedate,p.bloodgroup,p.bloodrh,p.intercode,p.typelive,p.dateupdate FROM person p LEFT JOIN cnation c ON c.nationcode=p.nation LEFT JOIN house h ON h.pcucode=p.pcucodeperson AND h.hcode=p.hcode LEFT JOIN coccupa co ON p.occupa=co.occupacode WHERE (1=1) AND (p.dateupdate >= (CONCAT('2012-09-01',' ','00:00:00'))) AND (p.dateupdate <= (CONCAT('2012-09-09',' ','23:59:59')))
+
+======================
+
+======================
+SELECT p.pcucodeperson is null,p.pcucodeperson,p.idcard,p.pid,h.hcode,p.prename,p.fname,p.lname,p.sex,p.birth,p.marystatus,co.mapoccupa,p.origin,p.nation,p.religion,p.educate,p.familyposition,p.fatherid,p.motherid,p.mateid,p.datein,p.dischargetype,p.dischargedate,p.bloodgroup,p.bloodrh,p.intercode,p.typelive,p.dateupdate FROM person p JOIN visit v ON p.pid=v.pid AND p.pcucodeperson=v.pcucode LEFT JOIN cnation c ON c.nationcode=p.nation LEFT JOIN house h ON h.pcucode=p.pcucodeperson AND h.hcode=p.hcode LEFT JOIN coccupa co ON p.occupa=co.occupacode WHERE (1=1) AND (v.visitdate >= (CONCAT('2012-09-01',' ','00:00:00'))) AND (v.visitdate <= (CONCAT('2012-09-09',' ','23:59:59')))
+
+======================
+
+======================
+SELECT vam.pcucodeperson,vam.pid,vam.visitno,vam.pregno,vad.datedeliver,vam.datecare,vam.resultcheck,vs.username,vam.dateupdate FROM visitancmothercare vam JOIN person p ON vam.pcucodeperson=p.pcucodeperson AND vam.pid=p.pid LEFT JOIN visitancdeliver vad ON vam.pcucodeperson=vad.pcucodeperson AND vam.pid=vad.pid AND vam.pregno=vad.pregno LEFT JOIN cdisease cd ON vad.deliverend=cd.diseasecode JOIN visitancpregnancy vpreg ON vam.pcucodeperson=vpreg.pcucodeperson AND vam.pid=vpreg.pid AND vam.pregno=vpreg.pregno LEFT JOIN visit vs ON vam.visitno=vs.visitno AND vam.pcucode=vs.pcucode WHERE (1=1) AND (vam.datecare >= '2012-09-01') AND (vam.datecare <= '2012-09-09')
+
+======================
+
+======================
+SELECT vpreg.pcucodeperson,vpreg.pid,vpreg.pregno,vpreg.lmp,vpreg.edc,vam.pcucodeperson,vam.pid,vam.pregno,vam.datecare,vpreg.dateupdate FROM visitancpregnancy vpreg LEFT JOIN visitancmothercare vam ON vpreg.pcucodeperson=vam.pcucodeperson AND vpreg.pid=vam.pid AND vpreg.pregno=vam.pregno WHERE (1=1) AND (vpreg.lmp >= '2012-09-01') AND (vpreg.lmp <= '2012-09-09')
+
+======================
+
+======================	
+SELECT vd.pcucode,v.pid,vd.visitno,v.visitdate,alias0cdrug.drugcode,alias0cdrug.sell,v.username,vd.dateupdate is null,vd.dateupdate FROM cdrug alias0cdrug JOIN visitdrug vd ON alias0cdrug.drugcode=vd.drugcode JOIN visit v ON v.pcucode=vd.pcucode AND v.visitno=vd.visitno JOIN user u ON vd.doctor1=u.username WHERE (1=1) AND (alias0cdrug.drugtype = '02') AND (v.visitdate >= '2012-09-01') AND (v.visitdate <= '2012-09-09') AND (alias0cdrug.drugcode != '897')
+
+======================
+
+======================
+SELECT u.pcucode,u.username,u.noofoccupation,u.idcard,u.prename,u.fname,u.lname,u.usersex,u.userbirth is null,u.userbirth,u.officertype,u.dateworkhere is null,u.dateworkhere,u.datemovehere is null,u.datemovehere FROM user u
+
+======================
+
+======================
+SELECT v.pcucode,v.pid,v.visitno,v.visitdate,v.timestart is null,v.timestart,p.typelive,v.timeservice,c.mapright,v.rightno,v.hosmain,v.receivepatient,v.receivefromhos,v.symptoms,v.servicetype is null,v.servicetype,v.temperature,v.pressure,v.pulse,v.respri,v.refer,v.refertohos,v.money3 is null,v.money3,v.money1 is null,v.money1,v.money2 is null,v.money2,v.dateupdate FROM person p JOIN visit v ON p.pid=v.pid AND p.pcucodeperson=v.pcucode LEFT JOIN cright c ON c.rightcode=v.rightcode WHERE (1=1) AND (v.visitdate >= '2012-09-01') AND (v.visitdate <= '2012-09-09') AND (v.flagservice != '99') AND (v.flagservice != '04') AND (v.flagservice != '05') AND (v.flagservice != '06') AND (v.flagservice != '07')
+
+======================
+
+======================
+SELECT alias0visit.pcucode,alias0person.pid,alias0visit.visitno,alias0visit.visitdate,alias0visitdiag.diagcode,cd.code506,alias0visitdiag506address.sickdatestart,alias0visitdiag506address.hno is null,alias0visitdiag506address.hno,alias0visitdiag506address.mu is null,alias0visitdiag506address.mu,alias0visitdiag506address.subdistcode is null,alias0visitdiag506address.subdistcode,alias0visitdiag506address.distcode is null,alias0visitdiag506address.distcode,alias0visitdiag506address.provcode is null,alias0visitdiag506address.provcode,alias0visitdiag506address.status,alias0visitdiag506address.deaddate,alias0visitdiag.causeill,alias0visit.username,alias0visitdiag.dateupdate FROM person alias0person JOIN visit alias0visit ON alias0visit.pid=alias0person.pid JOIN visitdiag alias0visitdiag ON alias0visit.visitno=alias0visitdiag.visitno JOIN visitdiag506address alias0visitdiag506address ON alias0visitdiag.pcucode=alias0visitdiag506address.pcucode AND alias0visitdiag.diagcode=alias0visitdiag506address.diagcode AND alias0visitdiag.visitno=alias0visitdiag506address.visitno JOIN cdisease cd ON cd.diseasecode=alias0visitdiag506address.diagcode WHERE (1=1) AND (alias0visit.visitdate >= '2012-09-01') AND (alias0visit.visitdate <= '2012-09-09') AND (alias0visit.flagservice != '99')
+
+======================
+
+======================
+SELECT v.pcucode,v.villcode,vw.dateupdate FROM village v LEFT JOIN villagebusiness vb ON v.pcucode=vb.pcucode AND v.villcode=vb.villcode LEFT JOIN villagewater vw ON v.pcucode=vw.pcucode AND v.villcode=vw.villcode
+
+======================
+
+======================
+SELECT W.pcucodeperson,P.pid,W.fptype,W.reasonnofp,W.childalive,vd.pid,W.dateupdate FROM person P JOIN women W ON P.pid=W.pid AND P.pcucodeperson=W.pcucodeperson JOIN visitancdeliver vd ON W.pcucodeperson=vd.pcucodeperson AND W.pid=vd.pid WHERE (1=1) AND (W.datesurvey >= '2012-09-01') AND (W.datesurvey <= '2012-09-09')
+

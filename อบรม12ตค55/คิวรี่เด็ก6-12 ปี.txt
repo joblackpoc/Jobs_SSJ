@@ -1,0 +1,9 @@
+SELECT v.villno AS หมู่ , v.villname AS บ้าน,
+SUM(CASE WHEN p.sex='1' THEN 1 ELSE 0 END) AS ชาย,
+SUM(CASE WHEN p.sex='2' THEN 1 ELSE 0 END) AS หญิง,
+SUM(CASE WHEN p.sex='1' OR p.sex='2' THEN 1 ELSE 0 END) AS รวม
+FROM village AS v
+Inner Join house AS h ON v.villcode = h.villcode
+Inner Join person AS p ON h.hcode = p.hcode
+where (getAgeYearNum(birth,curdate()) BETWEEN 6 and 12)
+GROUP BY v.villcode
